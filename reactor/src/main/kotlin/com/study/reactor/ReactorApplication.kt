@@ -3,6 +3,7 @@ package com.study.reactor
 import com.study.reactor.reactor2.Reactor2
 import com.study.reactor.reactor3.Reactor3
 import com.study.reactor.reactor4.Reactor4
+import com.study.reactor.reactor5.Reactor5
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -11,8 +12,8 @@ class ReactorApplication
 
 fun main(args: Array<String>) {
     runApplication<ReactorApplication>(*args)
-    var reactor4 : Reactor4 = Reactor4()
-    reactor4.flatMapAsyncFunction()
+    var reactor5 : Reactor5 = Reactor5()
+    reactor5.makeFluxWithTwoMono()
 
     /*
         var flux: Flux<String> = reactor2.returnFluxIterable()

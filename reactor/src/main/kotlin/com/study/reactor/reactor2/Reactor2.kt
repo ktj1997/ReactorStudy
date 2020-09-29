@@ -40,6 +40,20 @@ class Reactor2 {
          */
     }
 
+    fun returnSwitchIfEmpty(): Unit {
+        Flux.empty<String>().switchIfEmpty(Flux.just("qwer", "asdf")).subscribe{println(it)}
+        /*
+            비어있는 Flux라면 다른 시퀀스를 사용하게 한다.
+         */
+    }
+    fun returnDefault()
+    {
+        Flux.empty<String>().defaultIfEmpty("hello").subscribe{println(it)}
+        /*
+            값이 필요하다.
+         */
+    }
+
     fun errorMono(): Mono<String> {
         return Mono.error(RuntimeException())
         /*
