@@ -1,10 +1,6 @@
 package com.study.reactor.reactor6
 
 import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
-import java.lang.IllegalArgumentException
-import java.lang.RuntimeException
-import java.util.function.Consumer
 
 //에러처리
 class Reactor6 {
@@ -57,6 +53,7 @@ class Reactor6 {
         }.subscribe { println(it) }
         /*
             에러 발생 시 다른 시퀀스로 대체한다.
+            Function을 만들어야하는데 , 에러를 인자로 받고 리턴값이 Stream이어야한다.
             다른 시퀀스로 대체할 때는 원래 있던 제네릭을 따른다.
          */
     }
