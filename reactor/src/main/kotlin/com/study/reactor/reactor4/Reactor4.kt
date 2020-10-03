@@ -4,6 +4,19 @@ import reactor.core.publisher.Flux
 import reactor.core.scheduler.Schedulers
 
 class Reactor4 {
+    /*
+        flatMap과 Map의 차이
+        flatMap에서의 리턴값은 Flux<T> OR Mono<T>이며,
+        Map에서의 리턴값은 Object이다.
+
+        즉, flatMap은 Mono<T> -> Mono<U> || Mono<T> -> Flux<U> 와 같은 형태변환에 사용된다.
+
+        Reactive 개발에서 리턴값은 Publisher가 되어야한다.
+        이러한 특성상 flatMap을 쓰는게 ReactiveProgramming에 적합하다.
+
+        Reactive Stream에서는 null을 반환받을 수 없다.
+        -->Mono.empty( ), Flux.empty( )와 같은 메소드를 사용하자.
+     */
     fun mapFunction() {
         Flux.just("qwer", "asdf", "zxc").map { it.length }.subscribe { println(it) }
         /*

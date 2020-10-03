@@ -42,7 +42,7 @@ class Reactor7 {
     }
 
     fun subscribeOnScheduling() {
-        Flux.range(1, 10).subscribeOn(Schedulers.elastic()).map { it * -1 }
+        Flux.defer {Flux.range(1, 10) }.subscribeOn(Schedulers.elastic()).map { it * -1 }
                 .doOnNext { println("{$it}+${Thread.currentThread().name}") }
                 .map { it * -1 }
                 .doOnNext { println("{$it}+${Thread.currentThread().name}") }.subscribe()
@@ -51,6 +51,20 @@ class Reactor7 {
         subscribeOn()이 publishOn() 뒤에 위치하면 실질적으로 prefetch할 때를 제외하면 적용되지 않는다.
          subscribeOn()은 원본 시퀀스의 신호 발생을 처리할 스케줄러를 지정하므로 시퀀스 생성 바로 뒤에 subscribeOn()을 지정하도록 하자.
          또한 두 개 이상 subscribeOn()을 지정해도 첫 번째 subscribeOn()만 적용된다.
+         */
+
+        /*
+            defer는 subscribe가 일어날 때 publisher를 제공해주는 역할을 한다.
+            defer는 subscribeOn에 쓰인다?
+         */
+        /*
+            subscribeOn은 Subscriber가 빠르고 Publisher가 느릴 때 사용하자
+            -->DB에서 읽어오는 publisher는 느리고, 그걸 가공하는 subscriber는 빠르다.
+            --> 즉, 속도를 맞춰주는 역할
+
+            PublishOn은 반대로, Publisher가 빠르고 Subscriber가 느릴 때 사용하자
+            --> DB에 저장하는 작업은 Publisher는 빠르게 정리되지만
+            DB에저장하는 역할인 Subscriber는 느리다.
          */
     }
 }
